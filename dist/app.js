@@ -1,16 +1,29 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const cors_2 = require("./config/cors");
-const express_2 = require("express");
-const handle_errors_1 = require("./common/middleware/handle.errors");
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)(cors_2.corsOptions));
-app.use((0, express_2.json)());
-app.get('/', (_, res) => res.send('Banking API'));
-app.use(handle_errors_1.HandleErrors);
-exports.default = app;
+require("reflect-metadata");
+const env_1 = require("./config/env");
+const server_1 = require("./domain/presentation/server");
+const router_1 = require("./domain/presentation/router");
+const data_1 = require("./data");
+process.on('uncaughtException', (err) => {
+    console.error('❌ Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+});
+async function main() {
+    const postgres = new data_1.PostgresDatabase({
+        username: env_1.envs.DATABASE_USERNAME,
+        password: env_1.envs.DATABASE_PASSWORD,
+        host: env_1.envs.DATABASE_HOST,
+        port: Number(env_1.envs.DATABASE_PORT),
+        database: env_1.envs.DATABASE_NAME,
+    });
+    await postgres.connect();
+    const server = new server_1.Server({
+        port: Number(env_1.envs.PORT),
+        routes: router_1.AppRoutes.routes(),
+    });
+    await server.start();
+}
+main();

@@ -1,27 +1,31 @@
-import express from 'express';
-import cors from 'cors';
-import { corsOptions } from './config/cors';
-import { json } from 'express';
-import { handleErrors } from './common/middleware/handle.errors';
-import { AppDataSource } from './data/postgres/postgres.database';
+import 'reflect-metadata';
+import { envs } from './config/env';
+import { Server } from './domain/presentation/server';
+import { AppRoutes } from './domain/presentation/router';
+import { PostgresDatabase } from './data';
 
-const app = express();
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
-app.use(cors(corsOptions));
-app.use(json());
-
-app.get('/', (_, res) => res.send('Banking API'));
-app.use(handleErrors);
-
-export default app;
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log('📦 Conectado a PostgreSQL');
-    app.listen(env.port, () =>
-      console.log(`🚀 Servidor escuchando en http://localhost:${env.port}`),
-    );
-  })
-  .catch((err) => {
-    console.error('❌ Error al conectar a la base de datos:', err);
+async function main() {
+  const postgres = new PostgresDatabase({
+    username: envs.DATABASE_USERNAME,
+    password: envs.DATABASE_PASSWORD,
+    host: envs.DATABASE_HOST,
+    port: Number(envs.DATABASE_PORT),
+    database: envs.DATABASE_NAME,
   });
+  await postgres.connect();
+
+  const server = new Server({
+    port: Number(envs.PORT),
+    routes: AppRoutes.routes(),
+  });
+
+  await server.start();
+}
+main();

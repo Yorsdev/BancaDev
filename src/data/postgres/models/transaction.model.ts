@@ -10,17 +10,17 @@ import { User } from './user.model';
 @Entity('transactions')
 export class Transaction {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ManyToOne(() => User, (user) => user.sentTransactions)
-  sender: User;
+  sender!: User;
 
   @ManyToOne(() => User, (user) => user.receivedTransactions)
-  receiver: User;
+  receiver!: User;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  amount: number;
+  amount!: number;
 
   @CreateDateColumn({ type: 'timestamp' })
-  transaction_date: Date;
+  transaction_date!: Date;
 }

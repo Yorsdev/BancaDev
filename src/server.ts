@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-import { AppDataSource } from './data/postgres/postgres-database';
 import app from './app';
 import { config } from 'dotenv';
+import { AppDataSource } from './data/postgres/postgres.database';
 
 config();
 

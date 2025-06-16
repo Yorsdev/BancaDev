@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleware = void 0;
 const jwt_adapter_1 = require("../../../../config/jwt.adapter");
+// Adjust the import to only import User from '../../../../data'
 const data_1 = require("../../../../data");
+// Import UserRole from its correct module
 class AuthMiddleware {
     static async protect(req, res, next) {
         const token = req?.cookies?.token; //se cambió let por const
@@ -18,7 +20,7 @@ class AuthMiddleware {
                     id: payload.id,
                 },
             });
-            if (!user)
+            if (user === undefined)
                 return res.status(401).json({ message: 'invalid token' });
             req.sessionUser = user;
             next();

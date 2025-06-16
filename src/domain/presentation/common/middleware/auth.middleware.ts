@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtAdapter } from '../../../../config/jwt.adapter';
+// Adjust the import to only import User from '../../../../data'
 import { User, UserRole } from '../../../../data';
+// Import UserRole from its correct module
 
 export class AuthMiddleware {
   static async protect(req: Request, res: Response, next: NextFunction) {
@@ -18,7 +20,8 @@ export class AuthMiddleware {
           id: payload.id,
         },
       });
-      if (!user) return res.status(401).json({ message: 'invalid token' });
+      if (user === undefined)
+        return res.status(401).json({ message: 'invalid token' });
 
       (req as any).sessionUser = user;
 

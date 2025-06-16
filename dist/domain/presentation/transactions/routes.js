@@ -9,7 +9,14 @@ class UserTransactions {
         const router = (0, express_1.Router)();
         const creatortransactionService = new creator_transaction_service_1.CreatorTransactionService();
         const controller = new controller_1.TransactionsController(creatortransactionService);
-        router.post('/', controller.create.bind(controller));
+        router.post('/', async (req, res, next) => {
+            try {
+                await controller.create(req, res);
+            }
+            catch (err) {
+                next(err);
+            }
+        });
         return router;
     }
 }

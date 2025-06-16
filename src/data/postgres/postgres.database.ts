@@ -1,5 +1,6 @@
-import { DataSource, Transaction } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { User } from './models/user.model';
+import { Transaction } from './models/transaction.model';
 
 interface Options {
   host: string;
@@ -31,6 +32,7 @@ interface Options {
  */
 export class PostgresDatabase {
   public datasource: DataSource;
+  static datasource: any;
 
   /**
    * Crea una instancia de la clase PostgresDatabase.

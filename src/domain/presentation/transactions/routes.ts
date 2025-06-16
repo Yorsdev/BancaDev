@@ -3,14 +3,20 @@ import { CreatorTransactionService } from './services/creator-transaction.servic
 import { TransactionsController } from './controller';
 
 export class UserTransactions {
-  static get routes() {
+  static get routes(): Router {
     const router = Router();
 
     const creatortransactionService = new CreatorTransactionService();
 
     const controller = new TransactionsController(creatortransactionService);
 
-    router.post('/', controller.create.bind(controller));
+    router.post('/', async (req, res, next) => {
+      try {
+        await controller.create(req, res);
+      } catch (err) {
+        next(err);
+      }
+    });
 
     return router;
   }

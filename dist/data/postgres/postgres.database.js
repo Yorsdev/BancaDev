@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgresDatabase = void 0;
 const typeorm_1 = require("typeorm");
 const user_model_1 = require("./models/user.model");
+const transaction_model_1 = require("./models/transaction.model");
 /**
  * Clase para gestionar la conexión a la base de datos PostgresSQL utilizando TypeORM.
  *
@@ -44,7 +45,7 @@ class PostgresDatabase {
             password: options.password,
             database: options.database,
             synchronize: true,
-            entities: [user_model_1.User, typeorm_1.Transaction],
+            entities: [user_model_1.User, transaction_model_1.Transaction],
             ssl: {
                 rejectUnauthorized: false,
             },

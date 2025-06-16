@@ -1,4 +1,12 @@
 "use strict";
+// import {
+//   Entity,
+//   PrimaryGeneratedColumn,
+//   Column,
+//   CreateDateColumn,
+//   ManyToOne,
+// } from 'typeorm';
+// import { User } from './user.model';
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,6 +18,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Transaction = void 0;
+// @Entity('transactions')
+// export class Transaction {
+//   @PrimaryGeneratedColumn('uuid')
+//   id!: string;
+//   @Column('decimal', { precision: 10, scale: 2 })
+//   amount!: number;
+//   @CreateDateColumn({ type: 'timestamp' })
+//   transaction_date!: Date;
+//   @ManyToOne(() => User, (user) => user.sentTransactions)
+//   sender!: User;
+//   @ManyToOne(() => User, (user) => user.receivedTransactions)
+//   receiver!: User;
+// }
 const typeorm_1 = require("typeorm");
 const user_model_1 = require("./user.model");
 let Transaction = class Transaction {
@@ -20,14 +41,6 @@ __decorate([
     __metadata("design:type", String)
 ], Transaction.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.sentTransactions),
-    __metadata("design:type", user_model_1.User)
-], Transaction.prototype, "sender", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.receivedTransactions),
-    __metadata("design:type", user_model_1.User)
-], Transaction.prototype, "receiver", void 0);
-__decorate([
     (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2 }),
     __metadata("design:type", Number)
 ], Transaction.prototype, "amount", void 0);
@@ -35,6 +48,14 @@ __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: 'timestamp' }),
     __metadata("design:type", Date)
 ], Transaction.prototype, "transaction_date", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.sentTransactions),
+    __metadata("design:type", user_model_1.User)
+], Transaction.prototype, "sender", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_model_1.User, (user) => user.receivedTransactions),
+    __metadata("design:type", user_model_1.User)
+], Transaction.prototype, "receiver", void 0);
 exports.Transaction = Transaction = __decorate([
     (0, typeorm_1.Entity)('transactions')
 ], Transaction);

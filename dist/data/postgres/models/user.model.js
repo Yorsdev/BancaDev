@@ -59,7 +59,7 @@ const typeorm_1 = require("typeorm");
 const transaction_model_1 = require("./transaction.model");
 var UserRole;
 (function (UserRole) {
-    UserRole["USER"] = "user";
+    UserRole["USER"] = "client";
     UserRole["ADMIN"] = "admin";
 })(UserRole || (exports.UserRole = UserRole = {}));
 let User = class User {
@@ -88,6 +88,20 @@ __decorate([
     (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
 ], User.prototype, "account_number", void 0);
+__decorate([
+    (0, typeorm_1.Column)('enum', {
+        enum: UserRole,
+        default: UserRole.USER,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.Column)('boolean', {
+        nullable: false,
+        default: true,
+    }),
+    __metadata("design:type", Boolean)
+], User.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2, default: 0 }),
     __metadata("design:type", Number)

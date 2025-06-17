@@ -37,7 +37,7 @@ class PostgresDatabase {
      * @param options.database - Nombre de la base de datos.
      */
     constructor(options) {
-        this.datasource = new typeorm_1.DataSource({
+        PostgresDatabase.datasource = new typeorm_1.DataSource({
             type: 'postgres',
             host: options.host,
             port: options.port,
@@ -46,9 +46,7 @@ class PostgresDatabase {
             database: options.database,
             synchronize: true,
             entities: [user_model_1.User, transaction_model_1.Transaction],
-            ssl: {
-                rejectUnauthorized: false,
-            },
+            ssl: { rejectUnauthorized: false },
         });
     }
     /**
@@ -67,7 +65,7 @@ class PostgresDatabase {
     // }
     async connect() {
         try {
-            await this.datasource.initialize();
+            await PostgresDatabase.datasource.initialize();
             console.log('Postgres database connected!');
         }
         catch (error) {

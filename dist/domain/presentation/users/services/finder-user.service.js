@@ -67,7 +67,7 @@ class FinderUserService {
         return await userRepository.find({
             select: ['id', 'name', 'email', 'role'],
             where: { status: true },
-            relations: { petPost: true },
+            relations: { sentTransactions: true, receivedTransactions: true },
         });
     }
     async executeByFindOne(id) {

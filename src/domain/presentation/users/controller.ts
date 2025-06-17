@@ -46,7 +46,7 @@ export class UserController {
 
   async register(req: Request, res: Response): Promise<Response> {
     try {
-      const result = await this.creatorUserService.execute();
+      const result = await this.creatorUserService.execute(req.body);
       return res.status(201).json(result);
     } catch (error: any) {
       return handleErrors(res, error);

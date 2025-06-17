@@ -31,8 +31,7 @@ interface Options {
  * ```
  */
 export class PostgresDatabase {
-  public datasource: DataSource;
-  static datasource: any;
+  public static datasource: DataSource;
 
   /**
    * Crea una instancia de la clase PostgresDatabase.
@@ -45,7 +44,7 @@ export class PostgresDatabase {
    * @param options.database - Nombre de la base de datos.
    */
   constructor(options: Options) {
-    this.datasource = new DataSource({
+    PostgresDatabase.datasource = new DataSource({
       type: 'postgres',
       host: options.host,
       port: options.port,
@@ -54,9 +53,7 @@ export class PostgresDatabase {
       database: options.database,
       synchronize: true,
       entities: [User, Transaction],
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: { rejectUnauthorized: false },
     });
   }
 
@@ -76,7 +73,7 @@ export class PostgresDatabase {
   // }
   async connect() {
     try {
-      await this.datasource.initialize();
+      await PostgresDatabase.datasource.initialize();
       console.log('Postgres database connected!');
     } catch (error) {
       console.error('❌ Error during conection database:', error);

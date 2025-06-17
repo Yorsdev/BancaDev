@@ -53,11 +53,17 @@
 //   @OneToMany(() => Transaction, (transaction) => transaction.receiver)
 //   receivedTransactions!: Transaction[];
 // }
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  BaseEntity,
+} from 'typeorm';
 import { Transaction } from './transaction.model';
 
 export enum UserRole {
-  USER = 'user',
+  USER = 'client',
   ADMIN = 'admin',
 }
 
@@ -80,6 +86,18 @@ export class User {
 
   @Column({ length: 20 })
   account_number!: string;
+
+  @Column('enum', {
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  role!: UserRole;
+
+  @Column('boolean', {
+    nullable: false,
+    default: true,
+  })
+  status!: boolean;
 
   @Column('decimal', { precision: 10, scale: 2, default: 0 })
   balance!: number;

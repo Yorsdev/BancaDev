@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { envs } from './config/env';
-import { Server } from './domain/presentation/server';
-import { AppRoutes } from './domain/presentation/router';
+import { Server } from './presentation/server';
+import { AppRoutes } from './presentation/router';
 import { PostgresDatabase } from './data';
 
 process.on('uncaughtException', (err) => {

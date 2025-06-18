@@ -4,7 +4,7 @@ import { envs } from './env';
 export class JwtAdapter {
   static async generateToken(
     payload: any,
-    duration: import('jsonwebtoken').SignOptions['expiresIn'] = '4h',
+    duration: import('jsonwebtoken').SignOptions['expiresIn'] = '3h',
   ) {
     return new Promise((resolve) => {
       jwt.sign(

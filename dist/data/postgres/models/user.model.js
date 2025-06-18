@@ -1,14 +1,4 @@
 "use strict";
-// import { Transaction } from './transaction.model';
-// import { Exclude } from 'class-transformer';
-// import {
-//   Entity,
-//   PrimaryGeneratedColumn,
-//   Column,
-//   CreateDateColumn,
-//   OneToMany,
-//   BaseEntity,
-// } from 'typeorm';
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,52 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = exports.UserRole = void 0;
-// export enum UserRole {
-//   USER = 'user',
-//   ADMIN = 'admin',
-// }
-// @Entity('users')
-// export class User extends BaseEntity {
-//   @PrimaryGeneratedColumn('uuid')
-//   id!: string;
-//   @Column('varchar', {
-//     length: 150,
-//   })
-//   name!: string;
-//   @Column('varchar', {
-//     length: 150,
-//     unique: true,
-//     nullable: false,
-//   })
-//   email!: string;
-//   @Exclude()
-//   @Column('varchar', {
-//     length: 255,
-//     nullable: false,
-//   })
-//   password!: string;
-//   @Column({ length: 20 })
-//   account_number!: string;
-//   @Column('decimal', { precision: 10, scale: 2, default: 0 })
-//   balance!: number;
-//   @CreateDateColumn({ type: 'timestamp' })
-//   created_at!: Date;
-//   @OneToMany(() => Transaction, (transaction) => transaction.sender)
-//   sentTransactions!: Transaction[];
-//   @OneToMany(() => Transaction, (transaction) => transaction.receiver)
-//   receivedTransactions!: Transaction[];
-// }
-const typeorm_1 = require("typeorm");
 const transaction_model_1 = require("./transaction.model");
+const class_transformer_1 = require("class-transformer");
+const typeorm_1 = require("typeorm");
 var UserRole;
 (function (UserRole) {
     UserRole["USER"] = "client";
     UserRole["ADMIN"] = "admin";
 })(UserRole || (exports.UserRole = UserRole = {}));
-let User = class User {
-    static findOne(arg0) {
-        throw new Error('Method not implemented.');
-    }
+let User = class User extends typeorm_1.BaseEntity {
 };
 exports.User = User;
 __decorate([
@@ -81,6 +34,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
+    (0, class_transformer_1.Exclude)(),
     (0, typeorm_1.Column)('text'),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);

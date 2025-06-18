@@ -7,7 +7,7 @@ exports.JwtAdapter = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const env_1 = require("./env");
 class JwtAdapter {
-    static async generateToken(payload, duration = '4h') {
+    static async generateToken(payload, duration = '3h') {
         return new Promise((resolve) => {
             jsonwebtoken_1.default.sign(payload, env_1.envs.JWT_KEY, { expiresIn: duration }, (error, token) => {
                 if (error)

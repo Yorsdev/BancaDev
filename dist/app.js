@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const env_1 = require("./config/env");
-const server_1 = require("./domain/presentation/server");
-const router_1 = require("./domain/presentation/router");
+const server_1 = require("./presentation/server");
+const router_1 = require("./presentation/router");
 const data_1 = require("./data");
 process.on('uncaughtException', (err) => {
     console.error('❌ Uncaught Exception:', err);

@@ -1,12 +1,4 @@
 "use strict";
-// import {
-//   Entity,
-//   PrimaryGeneratedColumn,
-//   Column,
-//   CreateDateColumn,
-//   ManyToOne,
-// } from 'typeorm';
-// import { User } from './user.model';
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,19 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Transaction = void 0;
-// @Entity('transactions')
-// export class Transaction {
-//   @PrimaryGeneratedColumn('uuid')
-//   id!: string;
-//   @Column('decimal', { precision: 10, scale: 2 })
-//   amount!: number;
-//   @CreateDateColumn({ type: 'timestamp' })
-//   transaction_date!: Date;
-//   @ManyToOne(() => User, (user) => user.sentTransactions)
-//   sender!: User;
-//   @ManyToOne(() => User, (user) => user.receivedTransactions)
-//   receiver!: User;
-// }
 const typeorm_1 = require("typeorm");
 const user_model_1 = require("./user.model");
 let Transaction = class Transaction {

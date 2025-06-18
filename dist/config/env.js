@@ -59,4 +59,8 @@ exports.envs = {
         .asString()}?sslmode=require`,
     //Bcrypt
     BCRYPT_ROUNDS: env.get('BCRYPT_ROUNDS').default(10).asInt(),
+    MAILER_SERVICE: (0, env_var_1.get)('MAILER_SERVICE').required().asString(),
+    MAILER_EMAIL: (0, env_var_1.get)('MAILER_EMAIL').required().asString(),
+    MAILER_SECRET_KEY: (0, env_var_1.get)('MAILER_SECRET_KEY').required().asString(),
+    SEND_MAIL: (0, env_var_1.get)('SEND_MAIL').required().asBool(),
 };

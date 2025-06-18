@@ -23,7 +23,7 @@ export class UserRoutes {
       getTransactionsService,
     );
 
-    router.post('/Register', async (req, res, next) => {
+    router.post('/register', async (req, res, next) => {
       try {
         await controller.register(req, res);
       } catch (err) {
@@ -37,9 +37,15 @@ export class UserRoutes {
         next(err);
       }
     });
-    router.get('/history', AuthMiddleware.protect, async (req, res, next) => {
+    router.get('/me', AuthMiddleware.protect, async (req, res, next) => {
+      // try {
+      //   await controller.getHistory(req, res);
+      // } catch (err) {
+      //   next(err);
+      // }
       try {
-        await controller.getHistory(req, res);
+        const { user } = req as any;
+        res.json({ id: user.id, name: user.name, email: user.email });
       } catch (err) {
         next(err);
       }

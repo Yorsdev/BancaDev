@@ -6,7 +6,8 @@ export class AppRoutes {
   static routes(): Router {
     const router = Router();
 
-    router.use('/api/user', UserRoutes.routes);
+    router.use('/api/auth', UserRoutes.routes); //Para register y Login
+    router.use('/api/users', UserRoutes.routes); // para me
     router.use('/api/transactions', UserTransactions.routes);
 
     return router;

@@ -7,7 +7,8 @@ const routes_2 = require("./users/routes");
 class AppRoutes {
     static routes() {
         const router = (0, express_1.Router)();
-        router.use('/api/user', routes_2.UserRoutes.routes);
+        router.use('/api/auth', routes_2.UserRoutes.routes); //Para register y Login
+        router.use('/api/users', routes_2.UserRoutes.routes); // para me
         router.use('/api/transactions', routes_1.UserTransactions.routes);
         return router;
     }

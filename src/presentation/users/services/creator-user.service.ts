@@ -24,6 +24,7 @@ export class CreatorUserService {
     try {
       await this.userRepository.save(user);
       await this.mailer.sendConfirmationEmail(user.email, user.name);
+      return instanceToPlain(user);
     } catch (error) {
       console.log('❌ Error creating user:', error);
       throw error;

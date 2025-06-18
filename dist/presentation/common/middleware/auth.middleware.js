@@ -25,7 +25,7 @@ class AuthMiddleware {
                 res.status(401).json({ message: 'invalid token' });
                 return;
             }
-            req.sessionUser = user;
+            req.user = user;
             next();
         }
         catch (error) {

@@ -32,7 +32,7 @@ export class AuthMiddleware {
         return;
       }
 
-      (req as any).sessionUser = user;
+      (req as any).user = user;
       next();
     } catch (error) {
       res.status(500).json({ message: 'internal server error' });

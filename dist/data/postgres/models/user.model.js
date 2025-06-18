@@ -22,14 +22,17 @@ let User = class User extends typeorm_1.BaseEntity {
 };
 exports.User = User;
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
 ], User.prototype, "id", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)({ length: 100 }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)({ unique: true, length: 100 }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
@@ -39,10 +42,12 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
 ], User.prototype, "account_number", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)('enum', {
         enum: UserRole,
         default: UserRole.USER,
@@ -50,6 +55,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)('boolean', {
         nullable: false,
         default: true,
@@ -57,10 +63,12 @@ __decorate([
     __metadata("design:type", Boolean)
 ], User.prototype, "status", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2, default: 0 }),
     __metadata("design:type", Number)
 ], User.prototype, "balance", void 0);
 __decorate([
+    (0, class_transformer_1.Expose)(),
     (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)
 ], User.prototype, "created_at", void 0);

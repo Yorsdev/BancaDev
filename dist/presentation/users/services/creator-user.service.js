@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatorUserService = void 0;
+const class_transformer_1 = require("class-transformer");
 const bcrypt_adapter_1 = require("../../../config/bcrypt.adapter");
 const data_1 = require("../../../data");
 const nodemailer_adapter_1 = require("../../emails/nodemailer.adapter");
@@ -21,6 +22,7 @@ class CreatorUserService {
         try {
             await this.userRepository.save(user);
             await this.mailer.sendConfirmationEmail(user.email, user.name);
+            return (0, class_transformer_1.instanceToPlain)(user);
         }
         catch (error) {
             console.log('❌ Error creating user:', error);

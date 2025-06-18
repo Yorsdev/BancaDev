@@ -16,7 +16,7 @@ class UserRoutes {
         const loginUserService = new login_user_service_1.LoginUserService();
         const getTransactionsService = new get_user_transactions_service_1.GetUserTransactionsService();
         const controller = new controller_1.UserController(creatorUserService, finderUserService, loginUserService, getTransactionsService);
-        router.post('/Register', async (req, res, next) => {
+        router.post('/register', async (req, res, next) => {
             try {
                 await controller.register(req, res);
             }
@@ -32,9 +32,15 @@ class UserRoutes {
                 next(err);
             }
         });
-        router.get('/history', auth_middleware_1.AuthMiddleware.protect, async (req, res, next) => {
+        router.get('/me', auth_middleware_1.AuthMiddleware.protect, async (req, res, next) => {
+            // try {
+            //   await controller.getHistory(req, res);
+            // } catch (err) {
+            //   next(err);
+            // }
             try {
-                await controller.getHistory(req, res);
+                const { user } = req;
+                res.json({ id: user.id, name: user.name, email: user.email });
             }
             catch (err) {
                 next(err);
